@@ -1,0 +1,23 @@
+{
+    "name": "needcaffeine/slim-api-extras",
+    "description": "This is a library that adds RESTful capabilities to Slim Framework",
+    "keywords": ["extensions", "api", "rest", "middleware", "slim", "slim framework", "json"],
+    "type": "library",
+    "homepage": "https://github.com/needcaffeine/slim-api-extras",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vic Vijayakumar",
+            "email": "needcaffeine@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "slim/slim": ">=2.4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Needcaffeine\\Slim\\Extras\\": "."
+        }
+    }
+}
