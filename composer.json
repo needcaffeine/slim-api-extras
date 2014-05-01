@@ -1,5 +1,5 @@
 {
-    "name": "fousheezy/slim-api-extras",
+    "name": "needcaffeine/slim-api-extras",
     "description": "This is a library that adds RESTful capabilities to Slim Framework",
     "keywords": ["extensions", "api", "rest", "middleware", "slim", "slim framework", "json"],
     "type": "library",
