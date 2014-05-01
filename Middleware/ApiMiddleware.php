@@ -7,7 +7,12 @@ use Slim\Middleware;
 
 class ApiMiddleware extends Middleware
 {
-    public function __construct()
+    
+    /**
+     * @param boolean $verbose Indicates whether exceptions should be displayed with their stack trace for debugging.
+     * 
+     */
+    public function __construct($verbose = false)
     {
         $app = Slim::getInstance();
 
@@ -18,9 +23,13 @@ class ApiMiddleware extends Middleware
 
         // Exception handler.
         $app->error(function (\Exception $e) use ($app) {
-            $app->render(500, array(
+            $data = array(
                 'notifications' => array($e->getMessage())
-            ));
+            );
+            if ($verbose) {
+                $data['trace'] = $e->getTrace();
+            }
+            $app->render(500, $data);
         });
 
         // http://docs.slimframework.com/#Not-Found-Handler
