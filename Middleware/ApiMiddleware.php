@@ -22,7 +22,7 @@ class ApiMiddleware extends Middleware
         $app->config('debug', false);
 
         // Exception handler.
-        $app->error(function (\Exception $e) use ($app) {
+        $app->error(function (\Exception $e) use ($app, $verbose) {
             $data = array(
                 'notifications' => array($e->getMessage())
             );
