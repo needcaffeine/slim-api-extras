@@ -11,7 +11,7 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
 ```json
     {
         "require": {
-            "slim/slim": "2.4.2",
+            "slim/slim": ">=2.4.2",
             "needcaffeine/slim-api-extras": "dev-master"
         }
     }
@@ -25,9 +25,19 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
     use \Needcaffeine\Slim\Extras\ApiView;
     use \Needcaffeine\Slim\Extras\ApiMiddleware;
 
-    $app = new \Slim\Slim();
-    $app->view(new ApiView());
-    $app->add(new ApiMiddleware());
+    // This would probably be loaded from a config file perhaps.
+    $config = array(
+        'slim' => array(
+            'debug' => true
+        )
+    );
+
+    // Get the debug value from the config.
+    $debug = $config['slim']['debug'];
+
+    $app = new \Slim\Slim($config['slim']);
+    $app->view(new ApiView($debug));
+    $app->add(new ApiMiddleware($debug));
 
     // Example method demonstrating notifications
     // and non-200 HTTP response.
@@ -45,8 +55,35 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
         $responseCode = $responseCode ?: 200;
         $app->render($responseCode, $response);
     });
+
+    // Run the Slim application.
+    $app->run();
 ```
 
-#### Example
+#### Example of responses
 
+```
+» curl -i "http://localhost/hello"
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
 
+{
+    "notifications": "Name not provided.",
+    "meta": {
+        "result": "failure",
+        "status": 400
+    }
+}
+
+» curl -i "http://localhost/hello?name=Vic"
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+    "notifications": "Hello, Vic!",
+    "meta": {
+        "result": "success",
+        "status": 200
+    }
+}
+```

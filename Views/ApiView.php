@@ -7,6 +7,14 @@ use Slim\View;
 
 class ApiView extends View
 {
+    private $debug;
+
+    public function __construct($debug = false)
+    {
+        parent::__construct();
+        $this->debug = $debug;
+    }
+
     public function render($statusCode = 200, $data = null)
     {
         $app = Slim::getInstance();
@@ -37,7 +45,7 @@ class ApiView extends View
 
         // Depending on the PHP version, we'll either output this in
         // pretty print or not.
-        if (PHP_VERSION_ID >= 50400 && APPLICATION_ENV == 'development') {
+        if (PHP_VERSION_ID >= 50400 && $this->debug === true) {
             $body = json_encode($response, JSON_PRETTY_PRINT);
         } else {
             $body = json_encode($response);
