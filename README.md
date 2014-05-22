@@ -47,7 +47,11 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
 
         if ($name) {
             $response = "Hello, {$name}!";
+
+            $data = array("Red" => "dog", "Brown" => "dog");
+            $response['data'] = $data;
         } else {
+            $response = array();
             $response['notifications'][] = 'Name not provided.';
             $responseCode = 400;
         }
@@ -74,13 +78,18 @@ Content-Type: application/json; charset=utf-8
         "status": 400
     }
 }
-
+```
+```
 » curl -i "http://localhost/hello?name=Vic"
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
 {
     "notifications": "Hello, Vic!",
+    "data": {
+        "Red": "dog",
+        "Brown": "dog"
+    },
     "meta": {
         "result": "success",
         "status": 200
