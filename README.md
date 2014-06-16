@@ -22,8 +22,8 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
 ```php
     require 'vendor/autoload.php';
 
-    use \Needcaffeine\Slim\Extras\ApiView;
-    use \Needcaffeine\Slim\Extras\ApiMiddleware;
+    use \Needcaffeine\Slim\Extras\Views\ApiView;
+    use \Needcaffeine\Slim\Extras\Middleware\ApiMiddleware;
 
     // This would probably be loaded from a config file perhaps.
     $config = array(
