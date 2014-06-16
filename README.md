@@ -12,7 +12,7 @@ You may install this library with [Composer](https://getcomposer.org) and [Packa
     {
         "require": {
             "slim/slim": ">=2.4.2",
-            "needcaffeine/slim-api-extras": "dev-master"
+            "needcaffeine/slim-api-extras": "1.0.0"
         }
     }
 ```
