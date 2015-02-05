@@ -1,3 +1,5 @@
+[![Latest Stable Version](https://poser.pugx.org/needcaffeine/slim-api-extras/v/stable.svg)](https://packagist.org/packages/needcaffeine/slim-api-extras) [![Total Downloads](https://poser.pugx.org/needcaffeine/slim-api-extras/downloads.svg)](https://packagist.org/packages/needcaffeine/slim-api-extras) [![License](https://poser.pugx.org/needcaffeine/slim-api-extras/license.svg)](https://packagist.org/packages/needcaffeine/slim-api-extras)
+
 # Slim API Extras
 
 This library is an extension for the [Slim Framework](https://github.com/codeguy/Slim), allowing for easy implementation of APIs with RESTful responses.
