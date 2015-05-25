@@ -8,67 +8,64 @@ This library is an extension for the [Slim Framework](https://github.com/codeguy
 
 ### Installation
 
-You may install this library with [Composer](https://getcomposer.org) and [Packagist](https://packagist.org/) (recommended) or manually. In order to install this library using Composer, modify your composer.json file to add a reference to this library:
+It's recommended that you install this package via  [Composer](https://getcomposer.org).
 
-```json
-    {
-        "require": {
-            "slim/slim": ">=2.4.2",
-            "needcaffeine/slim-api-extras": "1.0.0"
-        }
-    }
+```bash
+$ composer require needcaffeine/slim-api-extras
 ```
 
-### Usage (via Composer)
+### Usage
 
 ```php
-    require 'vendor/autoload.php';
+<?php
 
-    use \Needcaffeine\Slim\Extras\Views\ApiView;
-    use \Needcaffeine\Slim\Extras\Middleware\ApiMiddleware;
+require 'vendor/autoload.php';
 
-    // This would probably be loaded from a config file perhaps.
-    $config = array(
-        'slim' => array(
-            'debug' => true
-        )
-    );
+use \Needcaffeine\Slim\Extras\Views\ApiView;
+use \Needcaffeine\Slim\Extras\Middleware\ApiMiddleware;
 
-    // Get the debug value from the config.
-    $debug = $config['slim']['debug'];
+// This would probably be loaded from a config file perhaps.
+$config = array(
+    'slim' => array(
+        'debug' => true
+    )
+);
 
-    $app = new \Slim\Slim($config['slim']);
-    $app->view(new ApiView($debug));
-    $app->add(new ApiMiddleware($debug));
+// Get the debug value from the config.
+$debug = $config['slim']['debug'];
 
-    // Example method demonstrating notifications
-    // and non-200 HTTP response.
-    $app->get('/hello', function () use ($app) {
-        $request = $app->request();
-        $name = $request->get('name');
+$app = new \Slim\Slim($config['slim']);
+$app->view(new ApiView($debug));
+$app->add(new ApiMiddleware($debug));
 
-        if ($name) {
-            $response = "Hello, {$name}!";
+// Example method demonstrating notifications
+// and non-200 HTTP response.
+$app->get('/hello', function () use ($app) {
+    $request = $app->request();
+    $name = $request->get('name');
 
-            $data = array("Red" => "dog", "Brown" => "dog");
-            $response['data'] = $data;
-        } else {
-            $response = array();
-            $response['notifications'][] = 'Name not provided.';
-            $responseCode = 400;
-        }
+    if ($name) {
+        $response = "Hello, {$name}!";
 
-        $responseCode = $responseCode ?: 200;
-        $app->render($responseCode, $response);
-    });
+        $data = array("Red" => "dog", "Brown" => "dog");
+        $response['data'] = $data;
+    } else {
+        $response = array();
+        $response['notifications'][] = 'Name not provided.';
+        $responseCode = 400;
+    }
 
-    // Run the Slim application.
-    $app->run();
+    $responseCode = $responseCode ?: 200;
+    $app->render($responseCode, $response);
+});
+
+// Run the Slim application.
+$app->run();
 ```
 
 #### Example of responses
 
-```
+```bash
 » curl -i "http://localhost/hello"
 HTTP/1.1 400 Bad Request
 Content-Type: application/json; charset=utf-8
@@ -80,8 +77,7 @@ Content-Type: application/json; charset=utf-8
         "status": 400
     }
 }
-```
-```
+
 » curl -i "http://localhost/hello?name=Vic"
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
